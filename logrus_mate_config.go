@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/sirupsen/logrus"
-	"github.com/gogap/env_json"
+	"github.com/heralight/env_json"
 )
 
 type Environments struct {

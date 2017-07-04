@@ -5,7 +5,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/bugsnag/bugsnag-go"
 
-	"github.com/gogap/logrus_mate"
+	"github.com/heralight/logrus_mate"
 )
 
 type BugsnagHookConfig struct {

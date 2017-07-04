@@ -2,19 +2,19 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogap/errors"
+	"github.com/heralight/errors"
 	"os"
 	"time"
 
-	"github.com/gogap/logrus_mate"
+	"github.com/heralight/logrus_mate"
 
-	_ "github.com/gogap/logrus_mate/hooks/bugsnag"
-	_ "github.com/gogap/logrus_mate/hooks/logstash"
-	_ "github.com/gogap/logrus_mate/hooks/mail"
-	_ "github.com/gogap/logrus_mate/hooks/slack"
-	_ "github.com/gogap/logrus_mate/hooks/syslog"
+	_ "github.com/heralight/logrus_mate/hooks/bugsnag"
+	_ "github.com/heralight/logrus_mate/hooks/logstash"
+	_ "github.com/heralight/logrus_mate/hooks/mail"
+	_ "github.com/heralight/logrus_mate/hooks/slack"
+	_ "github.com/heralight/logrus_mate/hooks/syslog"
 
-	_ "github.com/gogap/logrus_mate/writers/redisio"
+	_ "github.com/heralight/logrus_mate/writers/redisio"
 )
 
 func main() {
