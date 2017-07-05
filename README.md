@@ -1,3 +1,6 @@
+Fork of [https://github.com/gogap/logrus_mate](https://github.com/gogap/logrus_mate) for version 1.0.0, due to api change in v2.
+
+
 # Logrus Mate <img src="http://i.imgur.com/hTeVwmJ.png" width="40" height="40" alt=":walrus:" class="emoji" title=":walrus:"/>
 
 **Logrus mate** is a tool for [Logrus](https://github.com/sirupsen/logrus), it will help you to initial logger by config, including `Formatter`, `Hook`，`Level`, `Output` and `Environments`.
