@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/sirupsen/logrus"
 	"github.com/gogap/env_json"
+	"github.com/sirupsen/logrus"
 )
 
 type Environments struct {
@@ -66,44 +66,55 @@ func LoadLogrusMateConfig(filename string) (conf LogrusMateConfig, err error) {
 	return
 }
 
+func (conf *LoggerConfig) Validate(env ...string) (err error) {
+	envName := ""
+	if len(env) > 0 {
+		envName = env[0]
+	}
+	if conf.Hooks != nil {
+		for id, hook := range conf.Hooks {
+			if newFunc, exist := newHookFuncs[hook.Name]; !exist {
+				err = fmt.Errorf("logurs mate: hook not registered, env: %s, id: %d, name: %s", envName, id, hook)
+				return
+			} else if newFunc == nil {
+				err = fmt.Errorf("logurs mate: hook's func is damaged, env: %s, id: %d name: %s", envName, id, hook)
+				return
+			}
+		}
+	}
+
+	if conf.Formatter.Name != "" {
+		if newFunc, exist := newFormatterFuncs[conf.Formatter.Name]; !exist {
+			err = fmt.Errorf("logurs mate: formatter not registered, env: %s, name: %s", envName, conf.Formatter.Name)
+			return
+		} else if newFunc == nil {
+			err = fmt.Errorf("logurs mate: formatter's func is damaged, env: %s, name: %s", envName, conf.Formatter.Name)
+			return
+		}
+	}
+
+	if conf.Out.Name != "" {
+		if newFunc, exist := newWriterFuncs[conf.Out.Name]; !exist {
+			err = fmt.Errorf("logurs mate: writter not registered, env: %s, name: %s", envName, conf.Out.Name)
+			return
+		} else if newFunc == nil {
+			err = fmt.Errorf("logurs mate: writter's func is damaged, env: %s, name: %s", envName, conf.Out.Name)
+			return
+		}
+	}
+	return
+}
+
 func (p *LogrusMateConfig) Validate() (err error) {
 	for _, logger := range p.Loggers {
 		for envName, conf := range logger.Config {
 			if _, err = logrus.ParseLevel(conf.Level); err != nil {
 				return
 			}
-
-			if conf.Hooks != nil {
-				for id, hook := range conf.Hooks {
-					if newFunc, exist := newHookFuncs[hook.Name]; !exist {
-						err = fmt.Errorf("logurs mate: hook not registered, env: %s, id: %d, name: %s", envName, id, hook)
-						return
-					} else if newFunc == nil {
-						err = fmt.Errorf("logurs mate: hook's func is damaged, env: %s, id: %d name: %s", envName, id, hook)
-						return
-					}
-				}
+			if err = conf.Validate(envName); err != nil {
+				return
 			}
 
-			if conf.Formatter.Name != "" {
-				if newFunc, exist := newFormatterFuncs[conf.Formatter.Name]; !exist {
-					err = fmt.Errorf("logurs mate: formatter not registered, env: %s, name: %s", envName, conf.Formatter.Name)
-					return
-				} else if newFunc == nil {
-					err = fmt.Errorf("logurs mate: formatter's func is damaged, env: %s, name: %s", envName, conf.Formatter.Name)
-					return
-				}
-			}
-
-			if conf.Out.Name != "" {
-				if newFunc, exist := newWriterFuncs[conf.Out.Name]; !exist {
-					err = fmt.Errorf("logurs mate: writter not registered, env: %s, name: %s", envName, conf.Out.Name)
-					return
-				} else if newFunc == nil {
-					err = fmt.Errorf("logurs mate: writter's func is damaged, env: %s, name: %s", envName, conf.Out.Name)
-					return
-				}
-			}
 		}
 	}
 	return

@@ -119,10 +119,10 @@ func (w *FileLogWriter) docheck(size int) {
 }
 
 // write logger message into file.
-func (w *FileLogWriter) WriteMsg(msg string, level logrus.Level) error {
-	if level > w.Level {
-		return nil
-	}
+func (w *FileLogWriter) WriteMsg(msg string) error {
+	// if level > w.Level {
+	// 	return nil
+	// }
 	n := 24 + len(msg) // 24 stand for the length "2013/06/23 21:00:22 [T] "
 	w.docheck(n)
 	w.Logger.Print(msg)

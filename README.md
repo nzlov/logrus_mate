@@ -1,6 +1,3 @@
-Fork of [https://github.com/gogap/logrus_mate](https://github.com/gogap/logrus_mate) for version 1.0.0, due to api change in v2.
-
-
 # Logrus Mate <img src="http://i.imgur.com/hTeVwmJ.png" width="40" height="40" alt=":walrus:" class="emoji" title=":walrus:"/>
 
 **Logrus mate** is a tool for [Logrus](https://github.com/sirupsen/logrus), it will help you to initial logger by config, including `Formatter`, `Hook`，`Level`, `Output` and `Environments`.
@@ -149,6 +146,9 @@ type Environments struct {
 | [Graylog](https://github.com/gemnasium/logrus-graylog-hook) | `address` `facility` `extra`|
 | [Mail](https://github.com/zbindenren/logrus_mail) | `app_name` `host` `port` `from` `to` `username` `password`|
 | [Logstash](https://github.com/bshuster-repo/logrus-logstash-hook) | `app_name` `protocol` `address` `always_sent_fields` `prefix`|
+| [Stack-Hook](./hooks/stackhook) | `caller-level` `stack-level` from 0 to 5 (panic, fatal, error, warning, info, debug); warning: put in first|
+| [file](./hooks/file) | `filename` `maxdays` `rotate` `daily` `maxsize` `maxlines` `level` from 0 to 5 (panic, fatal, error, warning, info, debug)|
+| [file use formatter](./hooks/filewithformater) | `filename` `maxdays` `rotate` `daily` `maxsize` `maxlines` `level` from 0 to 5 (panic, fatal, error, warning, info, debug)|
 
 When we need use above hooks, we need import these package as follow:
 

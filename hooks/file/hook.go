@@ -7,8 +7,8 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/sirupsen/logrus"
 	"github.com/heralight/logrus_mate"
+	"github.com/sirupsen/logrus"
 
 	"github.com/heralight/logrus_mate/hooks/utils/caller"
 )
@@ -60,13 +60,13 @@ func (p *FileHook) Fire(entry *logrus.Entry) (err error) {
 	case logrus.FatalLevel:
 		fallthrough
 	case logrus.ErrorLevel:
-		return p.W.WriteMsg(fmt.Sprintf("[ERROR] %s", message), LevelError)
+		return p.W.WriteMsg(fmt.Sprintf("[ERROR] %s", message), logrus.ErrorLevel)
 	case logrus.WarnLevel:
-		return p.W.WriteMsg(fmt.Sprintf("[WARN] %s", message), LevelWarn)
+		return p.W.WriteMsg(fmt.Sprintf("[WARN] %s", message), logrus.WarnLevel)
 	case logrus.InfoLevel:
-		return p.W.WriteMsg(fmt.Sprintf("[INFO] %s", message), LevelInfo)
+		return p.W.WriteMsg(fmt.Sprintf("[INFO] %s", message), logrus.InfoLevel)
 	case logrus.DebugLevel:
-		return p.W.WriteMsg(fmt.Sprintf("[DEBUG] %s", message), LevelDebug)
+		return p.W.WriteMsg(fmt.Sprintf("[DEBUG] %s", message), logrus.DebugLevel)
 	default:
 		return nil
 	}

@@ -107,7 +107,7 @@ func (p *LogrusMate) initial(mateConf LogrusMateConfig) (err error) {
 	defer p.loggersLock.Unlock()
 
 	if err = mateConf.Validate(); err != nil {
-		return
+		panic(err)
 	}
 
 	p.loggers = make(map[string]*logrus.Logger, len(mateConf.Loggers))
