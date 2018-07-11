@@ -1,7 +1,7 @@
 package logrus_mate
 
 import (
-	"github.com/sirupsen/logrus"
+	"github.com/Sirupsen/logrus"
 )
 
 type TextFormatterConfig struct {

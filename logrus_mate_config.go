@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/gogap/env_json"
-	"github.com/sirupsen/logrus"
 )
 
 type Environments struct {
